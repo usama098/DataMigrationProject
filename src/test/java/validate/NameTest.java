@@ -1,5 +1,7 @@
 package validate;
 
+import com.sparta.datamigration.model.validate.Name;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +10,6 @@ class NameTest {
     @Test
     @DisplayName("Enter valid email address format")
     void rightValidatedData() {
-        assertEquals(true, Name.validateData("Usama Navid"));
+        Assertions.assertEquals(true, Name.validateData("Usama Navid"));
     }
 }

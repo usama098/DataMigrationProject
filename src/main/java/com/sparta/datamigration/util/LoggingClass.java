@@ -1,7 +1,7 @@
 package com.sparta.datamigration.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import start.Main;
+import com.sparta.datamigration.start.Main;
 
 public class LoggingClass {
     private static final Logger logger = LogManager.getLogger(Main.class);
