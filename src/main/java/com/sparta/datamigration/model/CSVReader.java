@@ -31,9 +31,15 @@ public class CSVReader {
                 // we create either a Clean employee record (which has Date, integer etc fields) or Corrupted employee record (all fields are string)
                 EmployeeRecord recordToAdd = EmployeeFactory.createRecord(column, valid);
 
+                // check if its duplicate record
+                boolean duplicate = listOfEmployees.checkDuplicate(column[0]);
+
                 // we insert this newly created record to the corresponding list [line 23]
-                listOfEmployees.insertEmployee(recordToAdd, valid);
+                listOfEmployees.insertEmployee(recordToAdd, valid, duplicate);
+
             }
+
+
 
         } catch (IOException e) {
             LoggingClass.traceLog("employees.csv file read");

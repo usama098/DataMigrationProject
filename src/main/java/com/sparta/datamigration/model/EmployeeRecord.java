@@ -1,6 +1,9 @@
 package com.sparta.datamigration.model;
 
-public abstract class EmployeeRecord {
+import java.util.Comparator;
+import java.util.Objects;
+
+public abstract class EmployeeRecord implements Comparable {
     private String employerID;
     private String namePrefix;
     private String firstName;
@@ -55,4 +58,18 @@ public abstract class EmployeeRecord {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public int compareTo(Object o) {
+        String compareEmpID = ((EmployeeRecord)o).getEmployerID();
+
+        return this.getEmployerID().compareTo(compareEmpID);
+    }
+
+    public static Comparator<EmployeeRecord> idComparator = new Comparator<>() {
+        @Override
+        public int compare(EmployeeRecord record1, EmployeeRecord record2) {
+            return record1.compareTo(record2);
+        }
+    };
 }

@@ -14,9 +14,13 @@ public class CleanRecord extends EmployeeRecord {
     private Date dateOfJoin;
     private int salary;
 
+    public CleanRecord() {
+
+    }
+
     @Override
     public String getEmployerID() {
-        return super.getEmployerID();
+        return employerID;
     }
 
     @Override
