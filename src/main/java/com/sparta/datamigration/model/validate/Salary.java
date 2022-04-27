@@ -1,5 +1,7 @@
 package com.sparta.datamigration.model.validate;
 
+import com.sparta.datamigration.util.LoggingClass;
+
 import java.util.regex.Pattern;
 
 public class Salary {
@@ -13,6 +15,7 @@ public class Salary {
     }
 
     public static int convertData(String salary) {
+        LoggingClass.traceLog(salary);
         return Integer.parseInt(salary);
     }
 }

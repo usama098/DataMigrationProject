@@ -1,5 +1,7 @@
 package com.sparta.datamigration.model.validate;
 
+import com.sparta.datamigration.util.LoggingClass;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +17,7 @@ public class MiddleInitial{
         }
     }
     public static String convertData(String middleInitial) {
+        LoggingClass.traceLog(middleInitial);
         return middleInitial;
     }
 }

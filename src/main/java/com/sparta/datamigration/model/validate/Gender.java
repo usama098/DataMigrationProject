@@ -1,5 +1,7 @@
 package com.sparta.datamigration.model.validate;
 
+import com.sparta.datamigration.util.LoggingClass;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,8 +20,10 @@ public class Gender {
     // Male = 0, female = 1
     public static boolean convertData(String gender) {
         if (gender.equals("M")) {
+            LoggingClass.traceLog("Gender = Male");
             return false;
         } else {
+            LoggingClass.traceLog("Gender = Female");
             return true;
         }
     }

@@ -1,5 +1,7 @@
 package com.sparta.datamigration.model.validate;
 
+import com.sparta.datamigration.util.LoggingClass;
+
 public class EmployeeID {
     public static boolean validateData(String empID){
         if (empID.length() != 6) {
@@ -18,6 +20,7 @@ public class EmployeeID {
     }
 
     public static String convertData(String empID) {
+        LoggingClass.traceLog(empID);
         return empID;
     }
 }

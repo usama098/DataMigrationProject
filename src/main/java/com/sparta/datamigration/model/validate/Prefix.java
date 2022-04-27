@@ -1,5 +1,7 @@
 package com.sparta.datamigration.model.validate;
 
+import com.sparta.datamigration.util.LoggingClass;
+
 public class Prefix {
     public static boolean validateData(String prefix){
         if(prefix.equals("Dr.") ||prefix.equals("Esq.")||prefix.equals("Hon.") ||prefix.equals("Jr.")||prefix.equals("Mr.")||prefix.equals("Mrs.")||
@@ -11,6 +13,7 @@ public class Prefix {
         }
     }
     public static String convertData(String prefix) {
+        LoggingClass.traceLog(prefix);
         return prefix;
     }
 }
