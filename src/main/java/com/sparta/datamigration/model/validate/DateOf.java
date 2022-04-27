@@ -1,6 +1,8 @@
 package com.sparta.datamigration.model.validate;
 
 
+import com.sparta.datamigration.util.LoggingClass;
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,24 +44,12 @@ public class DateOf {
 
         } catch (ParseException  e) {
             e.printStackTrace();
+            LoggingClass.traceLog("Date could not be converted");
         }
 
         assert date != null;
         return new Date(date.getTime());
+
     }
 
-    public static class EmailAddress {
-        public static boolean validateData(String emailAddress){
-            Pattern regexPattern = Pattern.compile("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$");
-            Matcher regMatcher   = regexPattern.matcher(emailAddress);
-            if(regMatcher.matches()){
-                return true;
-            }else{
-                return false;
-            }
-        }
-        public static String convertData(String emailAddress) {
-            return emailAddress;
-        }
-    }
 }

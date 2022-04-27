@@ -1,5 +1,7 @@
 package com.sparta.datamigration.model.validate;
 
+import com.sparta.datamigration.util.LoggingClass;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +16,8 @@ public class EmailAddress {
         }
     }
     public static String convertData(String emailAddress) {
+        LoggingClass.warnLog(emailAddress);
+        LoggingClass.traceLog(emailAddress);
         return emailAddress;
     }
 }
