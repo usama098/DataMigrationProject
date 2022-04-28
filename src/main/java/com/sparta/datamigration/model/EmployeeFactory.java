@@ -1,17 +1,21 @@
 package com.sparta.datamigration.model;
 
-import com.sparta.datamigration.model.validate.DateOf;
-import com.sparta.datamigration.model.validate.EmployeeID;
-import com.sparta.datamigration.model.validate.Gender;
-import com.sparta.datamigration.model.validate.Salary;
-
-import java.sql.Date;
+import com.sparta.datamigration.model.validate.*;
 
 public class EmployeeFactory {
-    public static EmployeeRecord createRecord(String[] data, boolean valid) {
-        EmployeeRecord record;
-        if (valid) {
-            /*
+    public static void createRecord(String[] data, EmployeeList list) {
+        boolean valid = validateRow(data);
+
+        EmployeeDTO record = new EmployeeDTO(data);
+
+        boolean duplicate = list.checkDuplicate(data[0]);
+
+        list.insertEmployee(record, valid, duplicate);
+    }
+
+    private static boolean validateRow(String[] data) {
+        boolean valid = true;
+        /*
             ID      0   173003
             Pref    1   Mrs.
             FName   2   Willia
@@ -22,17 +26,24 @@ public class EmployeeFactory {
             Birth   7   10/20/1960
             Join    8   7/30/2005
             Salary  9   158292
-             */
-            boolean gender = Gender.convertData(data[5]);
-            Date birth = DateOf.convertData(data[7]);
-            Date join = DateOf.convertData(data[8]);
-            int salary = Salary.convertData(data[9]);
+        */
 
-            record = new CleanRecord(data[0], data[1], data[2], data[3], data[4], gender, data[6],  birth, join, salary);
-        } else {
-            record = new CorruptedRecord(data[0], data[1], data[2], data[3], data[4], data[5], data[6],  data[7], data[8], data[9]);
+        String id = data[0];
+        String pref = data[1];
+        String first = data[2];
+        String middle = data[3];
+        String last = data[4];
+        String gender = data[5];
+        String email = data[6];
+        String birth = data[7];
+        String join = data[8];
+        String salary = data[9];
+
+        if ( !EmployeeID.validateData(id) || !Prefix.validateData(pref) || !Name.validateData(first) || !MiddleInitial.validateData(middle) || !Name.validateData(last) || !Gender.validateData(gender) || !EmailAddress.validateData(email) || !DateOf.validateData(birth) || !DateOf.validateData(join) || !Salary.validateData(salary) ) {
+            valid = false;
         }
 
-        return record;
+        return valid;
     }
+
 }

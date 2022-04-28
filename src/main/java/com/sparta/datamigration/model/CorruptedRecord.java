@@ -1,55 +1,55 @@
 package com.sparta.datamigration.model;
 
 public class CorruptedRecord extends EmployeeRecord {
-    private String employerID;
-    private String namePrefix;
-    private String firstName;
-    private String middleInitial;
-    private String lastName;
+    private String emp_id;
+    private String name_prefix;
+    private String firs_name;
+    private String middle_initial;
+    private String last_name;
     private String gender;
     private String email;
-    private String dateOfBirth;
-    private String dateOfJoin;
+    private String date_of_birth;
+    private String date_of_joining;
     private String salary;
 
-    public String getEmployerID() {
-        return employerID;
+    public String getStringEmp_id() {
+        return emp_id;
     }
 
-    public void setEmployerID(String employerID) {
-        this.employerID = employerID;
+    public void setEmp_id(String emp_id) {
+        this.emp_id = emp_id;
     }
 
-    public String getNamePrefix() {
-        return namePrefix;
+    public String getName_prefix() {
+        return name_prefix;
     }
 
-    public void setNamePrefix(String namePrefix) {
-        this.namePrefix = namePrefix;
+    public void setName_prefix(String name_prefix) {
+        this.name_prefix = name_prefix;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirs_name() {
+        return firs_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirs_name(String firs_name) {
+        this.firs_name = firs_name;
     }
 
-    public String getMiddleInitial() {
-        return middleInitial;
+    public String getMiddle_initial() {
+        return middle_initial;
     }
 
-    public void setMiddleInitial(String middleInitial) {
-        this.middleInitial = middleInitial;
+    public void setMiddle_initial(String middle_initial) {
+        this.middle_initial = middle_initial;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getGender() {
@@ -68,20 +68,20 @@ public class CorruptedRecord extends EmployeeRecord {
         this.email = email;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public String getDate_of_birth() {
+        return date_of_birth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDate_of_birth(String date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
 
-    public String getDateOfJoin() {
-        return dateOfJoin;
+    public String getDate_of_joining() {
+        return date_of_joining;
     }
 
-    public void setDateOfJoin(String dateOfJoin) {
-        this.dateOfJoin = dateOfJoin;
+    public void setDate_of_joining(String date_of_joining) {
+        this.date_of_joining = date_of_joining;
     }
 
     public String getSalary() {
@@ -92,16 +92,16 @@ public class CorruptedRecord extends EmployeeRecord {
         this.salary = salary;
     }
 
-    public CorruptedRecord(String employerID, String namePrefix, String firstName, String middleInitial, String lastName, String gender, String email, String dateOfBirth, String dateOfJoin, String salary) {
-        this.employerID = employerID;
-        this.namePrefix = namePrefix;
-        this.firstName = firstName;
-        this.middleInitial = middleInitial;
-        this.lastName = lastName;
+    public CorruptedRecord(String emp_id, String name_prefix, String firstName, String middle_initial, String last_name, String gender, String email, String date_of_birth, String dateOfJoin, String salary) {
+        this.emp_id = emp_id;
+        this.name_prefix = name_prefix;
+        this.firs_name = firstName;
+        this.middle_initial = middle_initial;
+        this.last_name = last_name;
         this.gender = gender;
         this.email = email;
-        this.dateOfBirth = dateOfBirth;
-        this.dateOfJoin = dateOfJoin;
+        this.date_of_birth = date_of_birth;
+        this.date_of_joining = dateOfJoin;
         this.salary = salary;
     }
 
@@ -109,23 +109,23 @@ public class CorruptedRecord extends EmployeeRecord {
     public String toString() {
         StringBuilder sb = new StringBuilder("[ ");
         String and = ", ";
-        sb.append(employerID);
+        sb.append(emp_id);
         sb.append(and);
-        sb.append(namePrefix);
+        sb.append(name_prefix);
         sb.append(and);
-        sb.append(firstName);
+        sb.append(firs_name);
         sb.append(and);
-        sb.append(middleInitial);
+        sb.append(middle_initial);
         sb.append(and);
-        sb.append(lastName);
+        sb.append(last_name);
         sb.append(and);
         sb.append(gender);
         sb.append(and);
         sb.append(email);
         sb.append(and);
-        sb.append(dateOfBirth);
+        sb.append(date_of_birth);
         sb.append(and);
-        sb.append(dateOfJoin);
+        sb.append(date_of_joining);
         sb.append(and);
         sb.append(salary);
         sb.append(" ]");

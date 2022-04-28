@@ -45,7 +45,7 @@ public class EmployeeList {
             this.duplicate.add(employee);
         } else if (valid) {
             this.clean.add(employee);
-            this.empID.add(employee.getEmployerID());
+            this.empID.add(employee.getStringEmp_id());
         } else {
             this.corrupted.add(employee);
         }

@@ -1,6 +1,5 @@
 package com.sparta.datamigration.controller;
 
-import com.sparta.datamigration.model.CleanRecord;
 import com.sparta.datamigration.model.EmployeeFactory;
 import com.sparta.datamigration.model.EmployeeList;
 import com.sparta.datamigration.model.EmployeeRecord;
@@ -34,13 +33,7 @@ public class CSVReader {
                 boolean valid = Validate.validateRow(column);
 
                 // we create either a Clean employee record (which has Date, integer etc fields) or Corrupted employee record (all fields are string)
-                EmployeeRecord recordToAdd = EmployeeFactory.createRecord(column, valid);
-
-                // check if its duplicate record
-                boolean duplicate = listOfEmployees.checkDuplicate(column[0]);
-
-                // we insert this newly created record to the corresponding list [line 23]
-                listOfEmployees.insertEmployee(recordToAdd, valid, duplicate);
+                EmployeeFactory.createRecord(column, listOfEmployees);
 
                 // call a viewer class to list out the  clean, corrupt and dupe records
                 // print out the corrupted, and dupe records
