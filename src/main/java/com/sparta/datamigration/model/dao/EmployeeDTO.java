@@ -19,4 +19,18 @@ public class EmployeeDTO {
     //  worth to keep EmployeeRecord all String, so could pass on String[] to constructor
     //  worth movin all .validateData into Validate class as just by the field name, so it can be called by:
     //              Validate.employeeID();
+
+
+//    public EmployeeDTO(Strin[] data) {
+//        this.emp_id = data[0];
+//        this.name_prefix = name_prefix;
+//        this.first_name = first_name;
+//        this.middle_initial = middle_initial;
+//        this.last_name = last_name;
+//        this.gender = gender;
+//        this.email = email;
+//        this.date_of_birth = date_of_birth;
+//        this.date_of_joining = date_of_joining;
+//        this.salary = salary;
+//    }
 }

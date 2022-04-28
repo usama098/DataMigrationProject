@@ -24,6 +24,28 @@ package com.sparta.datamigration.model.dao;
 //                   Data Access Object
 public class EmployeeDAO {
 
+
+//    private static final String TRUNCATE_TABLE = "TRUNCATE employees";
+//
+//    private static final String SELECT_EMPLOYEES = "SELECT * FROM employees;";
+//    private static final String INSERT_INTO = "INSERT INTO employees " +
+//            "(employee_id, title, first_name, middle_initial, last_name, gender, email, birth_date, join_date, salary) " +
+//            "VALUES(?,?,?,?,?,?,?,?,?,?);";
+//    private static final String DROP_TABLE = "DROP TABLE employees;";
+//    private static final String CREATE_TABLE = "CREATE TABLE employees (" +
+//            "employee_id VARCHAR(10) NOT NULL PRIMARY KEY,\n" +
+//            "title VARCHAR(5),\n" +
+//            "first_name VARCHAR(30),\n" +
+//            "middle_initial CHAR(1),\n" +
+//            "last_name VARCHAR(30),\n" +
+//            "gender CHAR(1),\n" +
+//            "email VARCHAR(40),\n" +
+//            "birth_date DATE,\n" +
+//            "join_date DATE,\n" +
+//            "salary INTEGER" +
+//            ");";
+
+
     // Employee getEmployeeById()
 
 
