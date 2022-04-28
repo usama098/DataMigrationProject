@@ -1,15 +1,20 @@
-package com.sparta.datamigration.model;
+package com.sparta.datamigration.controller;
 
+import com.sparta.datamigration.model.CleanRecord;
+import com.sparta.datamigration.model.EmployeeFactory;
+import com.sparta.datamigration.model.EmployeeList;
+import com.sparta.datamigration.model.EmployeeRecord;
 import com.sparta.datamigration.model.validate.*;
 import com.sparta.datamigration.util.LoggingClass;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CSVReader {
 
-    public static EmployeeList readInFile(String fileName){
+    public static ArrayList<EmployeeRecord> readInFile(String fileName){
         // this is where the 3 different ArrayList stored: clean, duplicate, corrupted
         EmployeeList listOfEmployees = new EmployeeList();
 
@@ -37,6 +42,9 @@ public class CSVReader {
                 // we insert this newly created record to the corresponding list [line 23]
                 listOfEmployees.insertEmployee(recordToAdd, valid, duplicate);
 
+                // call a viewer class to list out the  clean, corrupt and dupe records
+                // print out the corrupted, and dupe records
+
             }
 
 
@@ -46,6 +54,6 @@ public class CSVReader {
             e.printStackTrace();
         }
 
-        return listOfEmployees;
+        return listOfEmployees.getClean();
     }
 }
