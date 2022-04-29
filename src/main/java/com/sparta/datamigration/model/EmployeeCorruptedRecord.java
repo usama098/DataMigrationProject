@@ -1,9 +1,9 @@
 package com.sparta.datamigration.model;
 
-public class CorruptedRecord extends EmployeeRecord {
+public class EmployeeCorruptedRecord extends Employee {
     private String emp_id;
     private String name_prefix;
-    private String firs_name;
+    private String first_name;
     private String middle_initial;
     private String last_name;
     private String gender;
@@ -12,7 +12,7 @@ public class CorruptedRecord extends EmployeeRecord {
     private String date_of_joining;
     private String salary;
 
-    public String getStringEmp_id() {
+    public String getEmp_id() {
         return emp_id;
     }
 
@@ -28,12 +28,12 @@ public class CorruptedRecord extends EmployeeRecord {
         this.name_prefix = name_prefix;
     }
 
-    public String getFirs_name() {
-        return firs_name;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirs_name(String firs_name) {
-        this.firs_name = firs_name;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
     public String getMiddle_initial() {
@@ -92,28 +92,40 @@ public class CorruptedRecord extends EmployeeRecord {
         this.salary = salary;
     }
 
-    public CorruptedRecord(String emp_id, String name_prefix, String firstName, String middle_initial, String last_name, String gender, String email, String date_of_birth, String dateOfJoin, String salary) {
-        this.emp_id = emp_id;
-        this.name_prefix = name_prefix;
-        this.firs_name = firstName;
-        this.middle_initial = middle_initial;
-        this.last_name = last_name;
-        this.gender = gender;
-        this.email = email;
-        this.date_of_birth = date_of_birth;
-        this.date_of_joining = dateOfJoin;
-        this.salary = salary;
+    public EmployeeCorruptedRecord(String[] data) {
+        /*
+            ID      0   173003
+            Pref    1   Mrs.
+            FName   2   Willia
+            MInit   3   Q
+            LName   4   Weigand
+            Gender  5   F
+            Email   6   willia.weigand@gmail.com
+            Birth   7   10/20/1960
+            Join    8   7/30/2005
+            Salary  9   158292
+        */
+        this.emp_id = data[0];
+        this.name_prefix = data[1];
+        this.first_name = data[2];
+        this.middle_initial = data[3];
+        this.last_name = data[4];
+        this.gender = data[5];
+        this.email = data[6];
+        this.date_of_birth = data[7];
+        this.date_of_joining = data[8];
+        this.salary = data[9];
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[ ");
-        String and = ", ";
+        String and = ",\t";
         sb.append(emp_id);
         sb.append(and);
         sb.append(name_prefix);
         sb.append(and);
-        sb.append(firs_name);
+        sb.append(first_name);
         sb.append(and);
         sb.append(middle_initial);
         sb.append(and);
@@ -128,7 +140,7 @@ public class CorruptedRecord extends EmployeeRecord {
         sb.append(date_of_joining);
         sb.append(and);
         sb.append(salary);
-        sb.append(" ]");
+        sb.append(" ]\n");
 
         return sb.toString();
     }

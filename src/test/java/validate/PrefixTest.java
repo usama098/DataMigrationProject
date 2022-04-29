@@ -1,6 +1,6 @@
 package validate;
 
-import com.sparta.datamigration.model.validate.Prefix;
+import com.sparta.datamigration.model.Validate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,96 +11,96 @@ class PrefixTest {
     @DisplayName("Enter 'Dr.' as a prefix")
     @Test
     void validateDataOne() {
-        assertEquals(true, Prefix.validateData("Dr."));
+        assertEquals(true, Validate.prefix("Dr."));
     }
 
     @DisplayName("Enter 'Esq.' as a prefix")
     @Test
     void validateDataTwo() {
-        assertEquals(true, Prefix.validateData("Esq."));
+        assertEquals(true, Validate.prefix("Esq."));
     }
 
     @DisplayName("Enter 'Hon.' as a prefix")
     @Test
     void validateDataThree() {
-        assertEquals(true, Prefix.validateData("Hon."));
+        assertEquals(true, Validate.prefix("Hon."));
     }
 
     @DisplayName("Enter 'Jr.' as a prefix")
     @Test
     void validateDataFour() {
-        assertEquals(true, Prefix.validateData("Jr."));
+        assertEquals(true, Validate.prefix("Jr."));
     }
 
     @DisplayName("Enter 'Mr.' as a prefix")
     @Test
     void validateDataFive() {
-        assertEquals(true, Prefix.validateData("Mr."));
+        assertEquals(true, Validate.prefix("Mr."));
     }
 
     @DisplayName("Enter 'Mrs.' as a prefix")
     @Test
     void validateDataSix() {
-        assertEquals(true, Prefix.validateData("Mrs."));
+        assertEquals(true, Validate.prefix("Mrs."));
     }
 
     @DisplayName("Enter 'Ms.' as a prefix")
     @Test
     void validateDataSeven() {
-        assertEquals(true, Prefix.validateData("Ms."));
+        assertEquals(true, Validate.prefix("Ms."));
     }
 
     @DisplayName("Enter 'Messrs.' as a prefix")
     @Test
     void validateDataEight() {
-        assertEquals(true, Prefix.validateData("Messrs."));
+        assertEquals(true, Validate.prefix("Messrs."));
     }
 
     @DisplayName("Enter 'Mmes.' as a prefix")
     @Test
     void validateDataNine() {
-        assertEquals(true, Prefix.validateData("Mmes."));
+        assertEquals(true, Validate.prefix("Mmes."));
     }
 
     @DisplayName("Enter 'Msgr.' as a prefix")
     @Test
     void validateDataTen() {
-        assertEquals(true, Prefix.validateData("Msgr."));
+        assertEquals(true, Validate.prefix("Msgr."));
     }
 
     @DisplayName("Enter 'Prof.' as a prefix")
     @Test
     void validateDataEleven() {
-        assertEquals(true, Prefix.validateData("Prof."));
+        assertEquals(true, Validate.prefix("Prof."));
     }
 
     @DisplayName("Enter 'Rev.' as a prefix")
     @Test
     void validateDataTwelve() {
-        assertEquals(true, Prefix.validateData("Rev."));
+        assertEquals(true, Validate.prefix("Rev."));
     }
 
     @DisplayName("Enter 'Rt. Hon.' as a prefix")
     @Test
     void validateDataThirteen() {
-        assertEquals(true, Prefix.validateData("Rt. Hon."));
+        assertEquals(true, Validate.prefix("Rt. Hon."));
     }
 
     @DisplayName("Enter 'Sr.' as a prefix")
     @Test
     void validateDataFourteen() {
-        assertEquals(true, Prefix.validateData("Sr."));
+        assertEquals(true, Validate.prefix("Sr."));
     }
 
     @DisplayName("Enter 'St.' as a prefix")
     @Test
     void validateDataFifteen() {
-        assertEquals(true, Prefix.validateData("St."));
+        assertEquals(true, Validate.prefix("St."));
     }
 
     @DisplayName("Enter '123' as a prefix")
     @Test
     void invalidateData() {
-        assertEquals(false, Prefix.validateData("123"));
+        assertEquals(false, Validate.prefix("123"));
     }
 }

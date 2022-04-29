@@ -5,12 +5,11 @@ import com.sparta.datamigration.util.LoggingClass;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 
 //                   Data Transfer Object
-public class EmployeeDTO extends EmployeeRecord implements Comparable{
-
-    private int emp_id;
+public class EmployeeCleanRecord extends Employee {
+    private String emp_id;
+    private int integer_id;
     private String name_prefix;
     private String first_name;
     private String middle_initial;
@@ -21,7 +20,7 @@ public class EmployeeDTO extends EmployeeRecord implements Comparable{
     private Date date_of_joining;
     private int salary;
 
-    public EmployeeDTO(String[] data) {
+    public EmployeeCleanRecord(String[] data) {
         /*
             ID      0   173003
             Pref    1   Mrs.
@@ -34,7 +33,8 @@ public class EmployeeDTO extends EmployeeRecord implements Comparable{
             Join    8   7/30/2005
             Salary  9   158292
         */
-        this.emp_id = convertInteger(data[0]);
+        this.emp_id = data[0];
+        this.integer_id = convertInteger(data[0]);
         this.name_prefix = data[1];
         this.first_name = data[2];
         this.middle_initial = data[3];
@@ -70,7 +70,7 @@ public class EmployeeDTO extends EmployeeRecord implements Comparable{
 
     private static Date convertDate(String stringToParse) {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date date = new java.util.Date();
+        java.util.Date date;
 
         try {
             date = df.parse(stringToParse);
@@ -85,12 +85,12 @@ public class EmployeeDTO extends EmployeeRecord implements Comparable{
         return (Date)date;
     }
 
-    public int getEmp_id() {
-        return emp_id;
+    public int getInteger_id() {
+        return integer_id;
     }
 
-    public String getStringEmp_id(){
-        StringBuilder id = new StringBuilder(Integer.toString(this.emp_id));
+    public String getEmp_id(){
+        StringBuilder id = new StringBuilder(Integer.toString(this.integer_id));
 
         while (id.length() < 6) {
             id.insert(0, 0);
@@ -99,8 +99,9 @@ public class EmployeeDTO extends EmployeeRecord implements Comparable{
         return id.toString();
     }
 
-    public void setEmp_id(int emp_id) {
+    public void setEmp_id(String emp_id) {
         this.emp_id = emp_id;
+        this.integer_id = convertInteger(emp_id);
     }
 
     public String getName_prefix() {
@@ -176,18 +177,46 @@ public class EmployeeDTO extends EmployeeRecord implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        String compareEmpID = ((EmployeeDTO)o).getStringEmp_id();
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[ ");
+        String and = ",\t";
+        sb.append(emp_id);
+        sb.append(and);
+        sb.append(name_prefix);
+        sb.append(and);
+        sb.append(first_name);
+        sb.append(and);
+        sb.append(middle_initial);
+        sb.append(and);
+        sb.append(last_name);
+        sb.append(and);
+        sb.append(gender);
+        sb.append(and);
+        sb.append(email);
+        sb.append(and);
+        sb.append(date_of_birth);
+        sb.append(and);
+        sb.append(date_of_joining);
+        sb.append(and);
+        sb.append(salary);
+        sb.append(" ]\n");
 
-        return this.getStringEmp_id().compareTo(compareEmpID);
+        return sb.toString();
     }
-
-    public static Comparator<EmployeeDTO> idComparator = new Comparator<>() {
-        @Override
-        public int compare(EmployeeDTO record1, EmployeeDTO record2) {
-            return record1.compareTo(record2);
-        }
-    };
+//
+//    @Override
+//    public int compareTo(EmployeeRecord o) {
+//        String compareEmpID = ((EmployeeRecord)o).getEmp_id();
+//
+//        return this.getEmp_id().compareTo(compareEmpID);
+//    }
+//
+//    public static Comparator<EmployeeRecord> idComparator = new Comparator<>() {
+//        @Override
+//        public int compare(EmployeeRecord record1, EmployeeRecord record2) {
+//            return record1.compareTo(record2);
+//        }
+//    };
 
     // should move all the .convertData() functions from validate folders here
     //  worth to keep EmployeeRecord all String, so could pass on String[] to constructor

@@ -3,28 +3,28 @@ package com.sparta.datamigration.model;
 import java.util.*;
 
 public class EmployeeList {
-    private ArrayList<EmployeeRecord> clean = new ArrayList<>();
-    private ArrayList<EmployeeRecord> duplicate = new ArrayList<>();
-    private ArrayList<EmployeeRecord> corrupted = new ArrayList<>();
+    private ArrayList<Employee> clean = new ArrayList<>();
+    private ArrayList<Employee> duplicate = new ArrayList<>();
+    private ArrayList<Employee> corrupted = new ArrayList<>();
     private Set<String> empID = new HashSet<>();
 
-    public ArrayList<EmployeeRecord> getClean() {
+    public ArrayList<Employee> getClean() {
         return clean;
     }
 
-    public void setClean(ArrayList<EmployeeRecord> clean) {
+    public void setClean(ArrayList<Employee> clean) {
         this.clean = clean;
     }
 
-    public ArrayList<EmployeeRecord> getDuplicate() {
+    public ArrayList<Employee> getDuplicate() {
         return duplicate;
     }
 
-    public void setDuplicate(ArrayList<EmployeeRecord> duplicate) {
+    public void setDuplicate(ArrayList<Employee> duplicate) {
         this.duplicate = duplicate;
     }
 
-    public ArrayList<EmployeeRecord> getCorrupted() {
+    public ArrayList<Employee> getCorrupted() {
         return corrupted;
     }
 
@@ -36,16 +36,16 @@ public class EmployeeList {
         this.empID = empID;
     }
 
-    public void setCorrupted(ArrayList<EmployeeRecord> corrupted) {
+    public void setCorrupted(ArrayList<Employee> corrupted) {
         this.corrupted = corrupted;
     }
 
-    public void insertEmployee(EmployeeRecord employee, boolean valid, boolean duplicate) {
+    public void insertEmployee(Employee employee, boolean valid, boolean duplicate) {
         if (duplicate) {
             this.duplicate.add(employee);
         } else if (valid) {
             this.clean.add(employee);
-            this.empID.add(employee.getStringEmp_id());
+            this.empID.add(employee.getEmp_id());
         } else {
             this.corrupted.add(employee);
         }
@@ -56,37 +56,10 @@ public class EmployeeList {
         return this.empID.contains(empID);
     }
 
-    @Override
-    public String toString() {
-
-//        System.out.println("\n\nCorrupted Data:\n");
-//        for (EmployeeRecord record: corrupted) {
-//            System.out.println(record.toString());
-//        }
-//
-//        System.out.println("\nClean Data:");
-//        for (EmployeeRecord record: clean) {
-//            System.out.println(record.toString());
-//        }
-//
-//
-//        System.out.println("\nDuplicate Data:");
-//        for (EmployeeRecord record: duplicate) {
-//            System.out.println(record.toString());
-//        }
-//
-//        System.out.printf("\n\nNumber of Corrupted record:\t%d\nNumber of Clean record:\t%d\nNumber of Duplicate record: %d", corrupted.size(), clean.size(), duplicate.size());
-
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Number of Corrupted record:\t");
-        sb.append(corrupted.size());
-        sb.append("\nNumber of Clean record:\t");
-        sb.append(clean.size());
-        sb.append("\nNumber of Duplicate record:\t");
-        sb.append(duplicate.size());
-
-        return sb.toString();
+    public void sortLists() {
+        this.clean.sort(Employee.idComparator);
+        this.duplicate.sort(Employee.idComparator);
+        this.corrupted.sort(Employee.idComparator);
     }
 
 }

@@ -1,6 +1,6 @@
 package validate;
 
-import com.sparta.datamigration.model.validate.EmailAddress;
+import com.sparta.datamigration.model.Validate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,19 +11,18 @@ class EmailAddressTest {
     @Test
     @DisplayName("Enter valid email address format")
     void rightValidatedData() {
-        assertEquals(true, EmailAddress.validateData("usama.navid@gmail.com"));
+        assertEquals(true, Validate.email("usama.navid@gmail.com"));
     }
 
     @DisplayName("Enter wrong email format without @")
     @Test
     void wrongValidatedData() {
-        assertEquals(false, EmailAddress.validateData("usama.navidgmail.com"));
+        assertEquals(false, Validate.email("usama.navidgmail.com"));
     }
 
     @DisplayName("Enter wrong email format without @ & .")
     @Test
     void wrongValidatedDataTwo() {
-        EmailAddress emailAddress = new EmailAddress();
-        assertEquals(false, emailAddress.validateData("usama.navidgmailcom"));
+        assertEquals(false, Validate.email("usama.navidgmailcom"));
     }
 }

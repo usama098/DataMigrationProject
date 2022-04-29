@@ -1,6 +1,6 @@
 package validate;
 
-import com.sparta.datamigration.model.validate.Salary;
+import com.sparta.datamigration.model.Validate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,24 +14,24 @@ class SalaryTest {
     @DisplayName("Enter '12345' as a salary")
     @Test
     void validateDataOne() {
-        assertEquals(true, Salary.validateData("12345"));
+        assertEquals(true, Validate.salary("12345"));
     }
 
     @DisplayName("Enter '45' as a salary")
     @Test
     void validateDataTwo() {
-        assertEquals(true, Salary.validateData("45"));
+        assertEquals(true, Validate.salary("45"));
     }
 
     @DisplayName("Enter '45!!!' as a salary")
     @Test
     void invalidateDataOne() {
-        assertFalse( Salary.validateData("45!!!"));
+        assertFalse( Validate.salary("45!!!"));
     }
 
     @DisplayName("Enter 'abced' as a salary")
     @Test
     void invalidateDataTwo() {
-        assertFalse(Salary.validateData("abced"));
+        assertFalse(Validate.salary("abced"));
     }
 }

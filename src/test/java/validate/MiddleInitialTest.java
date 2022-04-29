@@ -1,6 +1,6 @@
 package validate;
 
-import com.sparta.datamigration.model.validate.MiddleInitial;
+import com.sparta.datamigration.model.Validate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,22 +11,22 @@ class MiddleInitialTest {
     @Test
     @DisplayName("Enter valid character as a name")
     void validateMiddleNamesAsACharacter() {
-        assertEquals(true, MiddleInitial.validateData("G"));
+        assertEquals(true, Validate.initial("G"));
     }
 
     @Test
     @DisplayName("Enter number as a middle name")
     void invalidateMiddleNamesAsACharacter() {
-        assertEquals(false, MiddleInitial.validateData("1"));
+        assertEquals(false, Validate.initial("1"));
     }
     @Test
     @DisplayName("Enter symbol as a middle name")
     void invalidateSymbolMiddleNamesAsACharacter() {
-        assertEquals(false, MiddleInitial.validateData("*"));
+        assertEquals(false, Validate.initial("*"));
     }
     @Test
     @DisplayName("Enter symbol as a middle name")
     void invalidateMiddleNames() {
-        assertEquals(false, MiddleInitial.validateData("abc"));
+        assertEquals(false, Validate.initial("abc"));
     }
 }
