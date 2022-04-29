@@ -1,7 +1,15 @@
 package com.sparta.datamigration.model.dao;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
 public class ConnectionFactory {
-    /*
+
     private static Connection connection = null;
     public static Connection getConnection() {
         //  connection == null means no connection is made, so it iwll open a a connection
@@ -21,6 +29,7 @@ public class ConnectionFactory {
                 e.printStackTrace();
             }
         }
+        System.out.println("connection creatd"); //make it in to a log later
         return connection;
     }
     public static void closeConnection(){
@@ -33,15 +42,5 @@ public class ConnectionFactory {
         }
         connection = null;
     }
-    public static String getInsertSQL(){
-        Properties dbProps = new Properties();
-        try {
-            dbProps.load(new FileReader("database.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return dbProps.getProperty("db.sql.insert");
-    }
-     */
 
 }
