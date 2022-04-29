@@ -31,6 +31,9 @@ import java.util.Map;
 //                   Data Access Object
 //                   Data Access Object
 public class EmployeeDAO {
+    /*
+    database not appearing in workbench
+     */
     private Connection connection = null;
 
     private static final String TRUNCATE_TABLE = "TRUNCATE employees";
@@ -38,17 +41,20 @@ public class EmployeeDAO {
     private static final String INSERT_INTO = "INSERT INTO employees (employee_id, title, first_name, middle_initial, last_name, gender, email, birth_date, join_date, salary) VALUES(?,?,?,?,?,?,?,?,?,?);";
     private static final String DROP_TABLE = "DROP TABLE employees;";
     private static final String CREATE_TABLE = "CREATE TABLE employees (" +
-            "employee_id INTEGER PRIMARY KEY AUTO_INCREMENT,\n" +
-            "title VARCHAR(5) NOT NULL,\n" +
-            "first_name VARCHAR(30) NOT NULL,\n" +
-            "middle_initial CHAR(1),\n" +
-            "last_name VARCHAR(30) NOT NULL,\n" +
-            "gender BOOLEAN NOT NULL,\n" +
-            "email VARCHAR(40) NOT NULL,\n" +
-            "birth_date DATE NOT NULL,\n" +
-            "join_date DATE NOT NULL,\n" +
+            "employee_id INTEGER PRIMARY KEY AUTO_INCREMENT," +
+            "title VARCHAR(5) NOT NULL," +
+            "first_name VARCHAR(30) NOT NULL," +
+            "middle_initial CHAR(1)," +
+            "last_name VARCHAR(30) NOT NULL," +
+            "gender BOOLEAN NOT NULL," +
+            "email VARCHAR(40) NOT NULL," +
+            "birth_date DATE NOT NULL," +
+            "join_date DATE NOT NULL," +
             "salary INTEGER" +
             ");";
+
+    // "CREATE TABLE IF NOT EXISTS employees(employee_id int NOT NULL AUTO_INCREMENT,
+    // first varchar(255), last varchar(255), PRIMARY KEY(id))"
 
     public void createTable() {
         System.out.println("within creat table");
