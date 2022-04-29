@@ -78,18 +78,18 @@ public class EmployeeCleanRecord extends Employee {
 
         } catch (ParseException e) {
             e.printStackTrace();
-            LoggingClass.traceLog("Date could not be converted @EmployeeDTA construction. Used default 1900-01-01 value.");
+            LoggingClass.errorLog("Date could not be converted @EmployeeDTA construction. Used default 1900-01-01 value.");
             date = new Date(1900, 1, 1);
         }
 
-        return (Date)date;
+        return (Date) date;
     }
 
     public int getInteger_id() {
         return integer_id;
     }
 
-    public String getEmp_id(){
+    public String getEmp_id() {
         StringBuilder id = new StringBuilder(Integer.toString(this.integer_id));
 
         while (id.length() < 6) {
@@ -203,26 +203,5 @@ public class EmployeeCleanRecord extends Employee {
 
         return sb.toString();
     }
-//
-//    @Override
-//    public int compareTo(EmployeeRecord o) {
-//        String compareEmpID = ((EmployeeRecord)o).getEmp_id();
-//
-//        return this.getEmp_id().compareTo(compareEmpID);
-//    }
-//
-//    public static Comparator<EmployeeRecord> idComparator = new Comparator<>() {
-//        @Override
-//        public int compare(EmployeeRecord record1, EmployeeRecord record2) {
-//            return record1.compareTo(record2);
-//        }
-//    };
-
-    // should move all the .convertData() functions from validate folders here
-    //  worth to keep EmployeeRecord all String, so could pass on String[] to constructor
-    //  worth movin all .validateData into Validate class as just by the field name, so it can be called by:
-    //              Validate.employeeID();
-
-
 
 }
