@@ -41,9 +41,10 @@ public class Validate {
     }
 
     public static boolean employeeID(String empID){
-        if (empID.length() != 6) {
-            return false;
-        }
+//        the emp_id length in the Large file are shorter
+//        if (empID.length() != 6) {
+//            return false;
+//        }
 
         for (int i=0; i<empID.length(); i++) {
             char c = empID.charAt(i);
@@ -57,7 +58,7 @@ public class Validate {
     }
 
     public static boolean prefix(String prefix){
-        if(prefix.equals("Dr.") ||prefix.equals("Esq.")||prefix.equals("Hon.") ||prefix.equals("Jr.")||prefix.equals("Mr.")||prefix.equals("Mrs.")||
+        if(prefix.equals("Dr.") || prefix.equals("Drs.") ||prefix.equals("Esq.")||prefix.equals("Hon.") ||prefix.equals("Jr.")||prefix.equals("Mr.")||prefix.equals("Mrs.")||
                 prefix.equals("Ms.")|| prefix.equals("Messrs.")||prefix.equals("Mmes.")|| prefix.equals("Msgr.")||prefix.equals("Prof.")||
                 prefix.equals("Rev.")|| prefix.equals("Rt. Hon.")|| prefix.equals("Sr.")||prefix.equals("St.")){
             return true;

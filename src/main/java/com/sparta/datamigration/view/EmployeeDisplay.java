@@ -29,6 +29,11 @@ public class EmployeeDisplay {
             sb.append(record.toString());
         }
 
+//        sb.append("\n\nClean Records:\n");
+//        for (Employee record: clean) {
+//            sb.append(record.toString());
+//        }
+
         sb.append("\n\nNumber of Corrupted record:\t");
         sb.append(corrupted.size());
         sb.append("\nNumber of Clean record:\t");
