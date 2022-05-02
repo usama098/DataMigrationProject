@@ -21,24 +21,23 @@ package com.sparta.datamigration.model.dao;
 //      which we hide behind the methods
 //      and can easily call that method just by passing on the parametres [example first_name]
 
+
 import com.sparta.datamigration.model.EmployeeCleanRecord;
 import com.sparta.datamigration.util.LoggingClass;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Map;
 
-//                   Data Access Object
 //                   Data Access Object
 public class EmployeeDAO {
-    /*
-    database not appearing in workbench
-     */
     private Connection connection = null;
 
-    private static final String TRUNCATE_TABLE = "TRUNCATE employees";
+    private static final String TRUNCATE_TABLE = "TRUNCATE employees;";
     private static final String SELECT_EMPLOYEES = "SELECT * FROM employees;";
+    private static final String SELECT_WHERE = "SELECT * FROM employees WHERE employee_id=?;";
     private static final String INSERT_INTO = "INSERT INTO employees (employee_id, title, first_name, middle_initial, last_name, gender, email, birth_date, join_date, salary) VALUES(?,?,?,?,?,?,?,?,?,?);";
+    private static final String DELETE_FROM = "DELETE FROM employees WHERE employee_id=?;";
+    private static final String UPDATE_EMPLOYEE = "UPDATE employees SET title=?, first_name=?, middle_initial=?, last_name=?, gender=?, email=?, birth_date=?, join_date=?, salary=? WHERE employee_id=?";
     private static final String DROP_TABLE = "DROP TABLE employees;";
     private static final String CREATE_TABLE = "CREATE TABLE employees (" +
             "employee_id INTEGER PRIMARY KEY AUTO_INCREMENT," +
@@ -137,10 +136,6 @@ public class EmployeeDAO {
     // Employee getEmployeeById()
 
 
-    /*
-    not finished yet, need to finsih selectQuery(results); first
-     */
-    // ArrayList<Employee> getAllEmployees()
     public ArrayList<EmployeeCleanRecord> getAllEmployees() {
         ArrayList<EmployeeCleanRecord> employeeList = new ArrayList<>();
 
@@ -148,20 +143,15 @@ public class EmployeeDAO {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(SELECT_EMPLOYEES);
 
-            if ( results != null) {
-                // maybe can use lambda expression here?
+            if ( results == null) {
+                System.out.println("No data have been found in the 'employees' table");
+            } else {
                 selectQuery(results);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            // logging could not get records from employees @
-        }
-
-        if (employeeList.size() < 1) {
-            System.out.println("No data have been found in the 'employees' table");
-        } else {
-            // call selectQuery to print them out
+            LoggingClass.errorLog("Could not get records @EmployeeDAO getAllEmployees().");
         }
 
         return employeeList;
@@ -172,29 +162,112 @@ public class EmployeeDAO {
 
         try {
             while (results.next()) {
-                // 1 - 10
-                results.getString(1);
+                sb.append("[");
+                for (int i=1 ; i<=10 ; i++) {
+                    sb.append(results.getString(i));
+                }
+                sb.append("]\n");
             }
+            results.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            // logging
+            LoggingClass.errorLog("Could not print the SQL SELECT results @EmployeeDAO selectQuery.");
+        }
+
+        System.out.println(sb.toString());
+    }
+
+
+    public void insertEmployee(ArrayList<EmployeeCleanRecord> recordsToInsert) {
+        try (Connection connection = ConnectionFactory.getConnection();) {
+            PreparedStatement prepStatement = connection.prepareStatement(INSERT_INTO);
+
+            for (EmployeeCleanRecord record: recordsToInsert) {
+                insertQuery(record, prepStatement);
+            }
+            prepStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LoggingClass.errorLog("Could not insert records into employees table @EmployeeDAO insertEmployee().");
+        }
+    }
+
+
+    /*
+            private String emp_id;
+            private int integer_id;
+            private String name_prefix;
+            private String first_name;
+            private String middle_initial;
+            private String last_name;
+            private boolean gender;     // Male = 0, female = 1
+            private String email;
+            private Date date_of_birth;
+            private Date date_of_joining;
+            private int salary;
+     */
+    public void insertQuery(EmployeeCleanRecord record, PreparedStatement statement) {
+        try {
+            statement.setInt(1, record.getInteger_id());
+            statement.setString(2, record.getName_prefix());
+            statement.setString(3, record.getFirst_name());
+            statement.setString(4, record.getMiddle_initial());
+            statement.setString(5, record.getLast_name());
+            statement.setBoolean(6, record.isGender());
+            statement.setString(7, record.getEmail());
+            statement.setDate(8, record.getDate_of_birth());
+            statement.setDate(9, record.getDate_of_joining());
+            statement.setInt(10, record.getSalary());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LoggingClass.errorLog("Could not insert record data into SQL code @EmployeeDAO insertQuery().");
         }
 
     }
 
 
-    // create insertEmployee
-    // .executeUpdate(INSERT_INTO)
+    public boolean deleteEmployeeById(int empID) {
+        boolean successful = false;
+
+        try (Connection connection = ConnectionFactory.getConnection();){
+            PreparedStatement prepStatement = connection.prepareStatement(DELETE_FROM);
+            prepStatement.setInt(1, empID);
+            successful = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LoggingClass.errorLog("Could not delete record by ID @ EmployeeDAO deleteEmployeeById().");
+        }
+
+        return successful;
+    }
 
 
-    // boolean deleteEmployeeById()
+    public boolean updateEmployee(int recordIDToUpdate, String title, String firstName, String middleInitial, String lastName, boolean gender, String email, Date birth, Date join, int salary) {
+        boolean successful = false;
 
+        try (Connection connection = ConnectionFactory.getConnection();){
+            PreparedStatement prepStatement = connection.prepareStatement(UPDATE_EMPLOYEE);
+            prepStatement.setString(1, title);
+            prepStatement.setString(2, firstName);
+            prepStatement.setString(3, middleInitial);
+            prepStatement.setString(4, lastName);
+            prepStatement.setBoolean(5, gender);
+            prepStatement.setString(6, email);
+            prepStatement.setDate(7, birth);
+            prepStatement.setDate(8, join);
+            prepStatement.setInt(9, salary);
+            prepStatement.setInt(10, recordIDToUpdate);
 
-    // boolean updateEmployee
-    /*  EXAMPLE:
-            public void update(User user, String[] params) {
-                user.setName(Objects.requireNonNull(params[0], "Name cannot be null"));
-                user.setEmail(Objects.requireNonNull(params[1], "Email cannot be null"));
-     */
+            prepStatement.executeUpdate();
+            successful = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            LoggingClass.errorLog("Could not update record @ EmployeeDAO updateEmployee().");
+        }
+        return successful;
+    }
 
 }

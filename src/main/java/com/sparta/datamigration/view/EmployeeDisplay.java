@@ -15,6 +15,10 @@ public class EmployeeDisplay {
      */
 
     public static void printEmployeeList(EmployeeList list) {
+
+        /*
+        maybe add an if statement to print "no records to listed" if one of the array is empty
+         */
         ArrayList<Employee> clean = list.getClean();
         ArrayList<Employee> duplicate = list.getDuplicate();
         ArrayList<Employee> corrupted = list.getCorrupted();
